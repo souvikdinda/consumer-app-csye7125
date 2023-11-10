@@ -1,21 +1,22 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../model/index.js';
 
-const message = sequelize.define('message', {
+const uptime = sequelize.define('uptime', {
   content: {
     type: DataTypes.STRING,
   },
   uri: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   status: {
-    type: DataTypes.ENUM('success', 'fail'),
-    defaultValue: 'fail',
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 }, {
   timestamps: true,
   createdAt: 'check_created',
   updatedAt: 'check_updated',
+  freezeTableName: true
 });
-export default message;
+export default uptime;
