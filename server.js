@@ -1,4 +1,3 @@
-
 import consumer from './consumers/kafkaconsumer.js';
 import uptime from './model/messageModel.js';
 import sequelize from './model/index.js'
@@ -16,16 +15,16 @@ const run = async () => {
     await consumer.subscribe({ topic: process.env.KAFKA_TOPIC });
 
     await consumer.run({
-      eachMessage: async ({ topic, partition, message }) => {
+      eachMessage: async ({ message }) => {
         const messageContent = message.value.toString();
         console.log('Received message from Kafka producer:', messageContent);
         try {
           const messageData = JSON.parse(messageContent)
-          const { uri, status } = messageData
-          console.log("Message received for uri:", uri, " and status is:", status)
+          const { url, status, processTime } = messageData
+          console.log("Message received for url:", url, "status:", status, "processTime:", processTime)
 
           try {
-              await uptime.create({ uri, status, content: messageContent });
+            await uptime.create({ url, status, processTime });
           } catch (error) {
             console.error('Error processing message:', error);
           }
@@ -40,4 +39,3 @@ const run = async () => {
 };
 
 run().catch(console.error);
-
