@@ -1,5 +1,7 @@
 
-def releaseTag
+
+
+ def releaseTag
 
 pipeline {
     agent any
@@ -22,7 +24,11 @@ pipeline {
                 script {
                     releaseTag = sh(returnStdout: true, script: 'git describe --tags --abbrev=0').trim()
                     echo "Release tag is ${releaseTag}"
+
                     sh "docker build -t quay.io/csye-7125/consumerapp:${releaseTag}."
+
+                    sh "docker build -t quay.io/csye-7125/consumerapp:latest."
+
                 }
             }
         }
