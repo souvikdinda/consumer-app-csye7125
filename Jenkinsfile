@@ -1,5 +1,5 @@
 
-// def releaseTag
+def releaseTag
 
 pipeline {
     agent any
@@ -20,9 +20,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    //releaseTag = sh(returnStdout: true, script: 'git describe --tags --abbrev=0').trim()
-                    //echo "Release tag is ${releaseTag}"
-                    sh "docker build -t quay.io/csye-7125/consumerapp:latest."
+                    releaseTag = sh(returnStdout: true, script: 'git describe --tags --abbrev=0').trim()
+                    echo "Release tag is ${releaseTag}"
+                    sh "docker build -t quay.io/csye-7125/consumerapp:${releaseTag}."
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
                     }
 
                     // Push the Docker image to Quay.io
-                    sh "docker push quay.io/csye-7125/consumerapp:latest"
+                    sh "docker push quay.io/csye-7125/consumerapp:${releaseTag}"
                 }
             }
         }
