@@ -1,7 +1,7 @@
 {
     "type": "module",
     "scripts": {
-        "dev":"nodemon ./server.js"
+        "dev": "nodemon ./server.js"
     },
     "dependencies": {
         "axios": "^1.6.0",
@@ -9,11 +9,11 @@
         "kafkajs": "^2.2.4",
         "nodemon": "^3.0.1",
         "pg": "^8.11.3",
-        "sequelize": "^6.34.0"
+        "sequelize": "^6.35.0"
     },
     "devDependencies": {
         "@semantic-release/git": "^10.0.1",
         "@semantic-release/github": "^9.2.1",
         "semantic-release": "^22.0.5"
-      }
+    }
 }
