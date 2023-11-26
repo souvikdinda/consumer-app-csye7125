@@ -1,6 +1,4 @@
 
-
-
  def releaseTag
 
 pipeline {
