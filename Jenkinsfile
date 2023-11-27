@@ -24,7 +24,7 @@ pipeline {
                     echo "Release tag is ${releaseTag}"
 
                     sh "docker build -t quay.io/csye-7125/consumerapp:${releaseTag} ."
-
+                    sh "docker tag quay.io/csye-7125/consumerapp:${releaseTag} quay.io/csye-7125/consumerapp:latest"
 
                 }
             }
@@ -40,6 +40,7 @@ pipeline {
 
                     // Push the Docker image to Quay.io
                     sh "docker push quay.io/csye-7125/consumerapp:${releaseTag}"
+                    sh "docker push quay.io/csye-7125/consumerapp:latest"
                 }
             }
         }
