@@ -1,4 +1,3 @@
-
 def releaseTag
 
 pipeline {
@@ -36,10 +35,8 @@ pipeline {
                 script {
                     releaseTag = sh(returnStdout: true, script: 'git describe --tags --abbrev=0').trim()
                     echo "Release tag is ${releaseTag}"
-
                     sh "docker build -t quay.io/csye-7125/consumerapp:${releaseTag} ."
                     sh "docker tag quay.io/csye-7125/consumerapp:${releaseTag} quay.io/csye-7125/consumerapp:latest"
-
                 }
             }
         }
@@ -64,5 +61,5 @@ pipeline {
             build job: 'infra-helm-chart-deployment', wait: false
         }
     }
-
+    
 }
